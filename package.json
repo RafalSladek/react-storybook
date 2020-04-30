@@ -12,14 +12,15 @@
     "mocha": "--require scripts/mocha_runner src/**/__tests__/**/*.js"
   },
   "scripts": {
-    "prepublish": "sh scripts/prepublish.sh",
+    "prepublish": "yarn run snyk-protect && sh scripts/prepublish.sh",
     "lint": "eslint src",
     "lintfix": "eslint src --fix",
     "testonly": "mocha $npm_package_options_mocha",
     "test": "npm run lint && npm run testonly",
     "test-watch": "npm run testonly -- --watch --watch-extensions js",
     "dev": "DEV_BUILD=1 nodemon --watch src --exec 'npm run prepublish'",
-    "postpublish": "greenkeeper-postpublish"
+    "postpublish": "greenkeeper-postpublish",
+    "snyk-protect": "snyk protect"
   },
   "dependencies": {
     "@kadira/react-split-pane": "^1.4.0",
@@ -60,7 +61,8 @@
     "uuid": "^2.0.3",
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.0",
-    "webpack-hot-middleware": "^2.13.2"
+    "webpack-hot-middleware": "^2.13.2",
+    "snyk": "^1.316.1"
   },
   "peerDependencies": {
     "react": "^0.14.7 || ^15.0.0",
@@ -94,5 +96,6 @@
     "start-storybook": "./dist/server/index.js",
     "build-storybook": "./dist/server/build.js",
     "storybook-server": "./dist/server/index.js"
-  }
+  },
+  "snyk": true
 }
